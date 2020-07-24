@@ -19,12 +19,11 @@ def change_frequency(path, limit, run):
     unique_file_list = list(Counter(file_list).keys())
     unique_file_count = list(Counter(file_list).values())
 
-    print(limit)
-
     data_frame = {
         "frequency": unique_file_count if limit is None else unique_file_count[0:int(limit)],
         "file": unique_file_list if limit is None else unique_file_list[0:int(limit)]
     }
 
-    fc_model = pd.DataFrame(data_frame)
+    fc_model = pd.DataFrame(data_frame).sort_values(by=['frequency'], ascending=False)
+
     return fc_model

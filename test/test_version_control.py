@@ -27,10 +27,11 @@ class VersionControlTestCase(TestCase):
         expected = pd.DataFrame({
             "frequency": [1, 2, 3],
             "file": ['three', 'two', 'one'],
-        })
+        }).sort_values(['frequency'], ascending=False)
 
         run_mock = mock.Mock()
         run_mock.return_value = file_list
+
         result = change_frequency("/path", None, run_mock)
         run_mock.assert_called_once()
         assert_frame_equal(expected, result)
@@ -47,7 +48,6 @@ class VersionControlTestCase(TestCase):
         run_mock = mock.Mock()
         run_mock.return_value = file_list
         result = change_frequency("/path", 1, run_mock)
-        print(result)
         run_mock.assert_called_once()
         assert_frame_equal(expected, result)
 

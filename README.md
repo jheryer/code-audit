@@ -1,6 +1,9 @@
 # vcaudit 👋
 
-> A simple version control system audit tool that prints the file change frequency of a git repository
+> A simple version control system audit command line tool
+
+## Features
+* Print the file change frequency of a git repository
 
 ## Installation
 ```sh
