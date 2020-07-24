@@ -7,20 +7,23 @@ def _remove_empty_strings(file_list):
     return list(filter(None, file_list))
 
 
-def _get_unique(file_list):
-    return list(set(file_list))
+def change_frequency(path, limit, run):
+    if not path:
+        raise Exception("Provided path is not valid or empty")
 
+    if not callable(run):
+        raise Exception("Provided run is not callable")
 
-def change_frequency(path, run):
     file_list = run(change_frequency_command(path))
     file_list = _remove_empty_strings(file_list)
-
     unique_file_list = list(Counter(file_list).keys())
     unique_file_count = list(Counter(file_list).values())
 
+    print(limit)
+
     data_frame = {
-        "frequency": unique_file_count,
-        "file": unique_file_list
+        "frequency": unique_file_count if limit is None else unique_file_count[0:int(limit)],
+        "file": unique_file_list if limit is None else unique_file_list[0:int(limit)]
     }
 
     fc_model = pd.DataFrame(data_frame)
