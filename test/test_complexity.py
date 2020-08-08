@@ -1,5 +1,5 @@
 import unittest
-from process import files_in_path, get_content_by_file, get_content_by_file_list
+from process import files_in_path, get_content_by_file, get_content_by_file_list, get_source_frame_from_file_frame
 
 
 class MyTestCase(unittest.TestCase):
@@ -11,7 +11,7 @@ class MyTestCase(unittest.TestCase):
     def test_Given_a_file_return_a_dataframe(self):
         file = "/home/jheryer/Projects/python/maat-scripts/miner/git_interactions.py"
         data_frame = get_content_by_file(file)
-        data_frame.info()
+        #        data_frame.info()
         self.assertTrue(True)
 
     def test_Given_a_list_of_files_return_a_pd_dataframe(self):
@@ -19,9 +19,17 @@ class MyTestCase(unittest.TestCase):
                      ]
         repo = "/home/jheryer/Projects/python/maat-scripts/"
         data_frame = get_content_by_file_list(file_list, repo)
-        data_frame.info()
-        print(data_frame)
+        #        data_frame.info()
+        #        print(data_frame)
+        self.assertTrue(True)
 
+    def test_Given_a_list_of_files_return_a_source_code_complexity_dataframe(self):
+        file_list = ["/home/jheryer/Projects/python/maat-scripts/miner/git_interactions.py",
+                     "/home/jheryer/Projects/python/maat-scripts/miner/git_proximity_analysis.py"]
+        repo = "/home/jheryer/Projects/python/maat-scripts/"
+        data_frame = get_content_by_file_list(file_list, repo)
+        source_frame = get_source_frame_from_file_frame(data_frame)
+        print(source_frame)
         self.assertTrue(True)
 
 

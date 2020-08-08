@@ -4,6 +4,7 @@ import pandas as pd
 from typing import List, Text
 
 pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
 
 
 def run(args: List) -> List:
@@ -50,8 +51,19 @@ def get_content_by_file_list(file_list: List, repo: Text):
     _tabs_not_spaces(content)
     _inject_line_numbers(content)
     _inject_comment_empty(content)
+    _inject_indentation(content)
 
     return content
+
+
+def get_source_frame_from_file_frame(file_frame):
+    source_code_content = file_frame[file_frame['is_comment'] | file_frame['is_empty']]
+    source_code_content = source_code_content.groupby('file_name')['indent'].agg(['count', 'sum'])
+    source_code_content.columns = ['lines', 'indents']
+    source_code_content.head()
+    source_code_content['complexity'] = source_code_content['indents'] / source_code_content['lines']
+    source_code_content.head(1)
+    return source_code_content
 
 
 def _clean_file_name(content, repo):
@@ -78,4 +90,9 @@ def _inject_line_numbers(content):
 def _inject_comment_empty(content):
     content['is_comment'] = content['line'].str.match(r'^ *(#|//|/\*|\*).*')
     content['is_empty'] = content['line'].str.replace(" ", "").str.len() == 0
+    content.head(1)
+
+
+def _inject_indentation(content):
+    content['indent'] = content['line'].str.len() - content['line'].str.lstrip().str.len()
     content.head(1)
