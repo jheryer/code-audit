@@ -1,9 +1,15 @@
-from typing import Text
+from typing import Text, List
 import pandas as pd
+from process import data_frame_from_file_list
 
 
 def get_complexity_by_file(file: Text, query_root: Text):
-    return get_complexity_by_file([file], query_root)
+    return get_complexity_by_file_list([file], query_root)
+
+
+def get_complexity_by_file_list(file_list: List, query_root: Text):
+    file_data_frame = data_frame_from_file_list(file_list)
+    return get_complexity_from_file_content_processing_frame(file_data_frame, query_root)
 
 
 def get_complexity_from_file_content_processing_frame(data_frame, query_root):

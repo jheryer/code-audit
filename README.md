@@ -1,4 +1,4 @@
-# vcaudit 👋
+# vcaudit
 
 > A simple version control system audit command line tool
 
@@ -13,9 +13,8 @@ pip install pandas
 ## Usage
 
 ```sh
-python vcaudit.py --repo /path/to/repo
-python vcaudit.py --repo /path/to/repo --limit 10
-
+python vcaudit.py --audit frequency --repo /path/to/repo
+python vcaudit.py --audit frequency --repo /path/to/repo --limit 10
 ```
 
 

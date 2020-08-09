@@ -1,10 +1,10 @@
 from unittest import TestCase, mock, main
-from version_control import change_frequency
+from frequency import change_frequency
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
 
-class VersionControlTestCase(TestCase):
+class FrequencyTestCase(TestCase):
     # noinspection PyMethodMayBeStatic
     def test_given_a_path_and_no_limit_assert_basic_change_frequency(self):
         file_list = ['three', 'two', 'one']

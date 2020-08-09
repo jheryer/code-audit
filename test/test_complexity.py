@@ -1,5 +1,5 @@
 import unittest
-from complexity import get_complexity_from_file_content_processing_frame
+from complexity import get_complexity_from_file_content_processing_frame, get_complexity_by_file
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
@@ -26,7 +26,7 @@ def _build_mock_content_file_frame_with_comments_and_empty_lines():
         "file_name": ['/test/test.txt', '/test/test.txt', '/test/test.txt', '/test/test.txt',
                       '/test/test.txt', '/test/test.txt', '/test/test.txt', '/test/test.txt'],
         "line": [' a', '    a', '#  comment', '// comment', ' ', '    ', '/* comment */', '      a'],
-        "line_number": [1, 2, 3, 4, 5, 6, 7],
+        "line_number": [1, 2, 3, 4, 5, 6, 7, 8],
     })
 
 
@@ -54,8 +54,6 @@ class MyTestCase(unittest.TestCase):
             'indents': [11],
             'complexity': [3.666667]
         })
-        print(expected)
-        print(result)
         assert_frame_equal(expected, result)
 
     # noinspection PyMethodMayBeStatic
@@ -69,9 +67,9 @@ class MyTestCase(unittest.TestCase):
             'indents': [11],
             'complexity': [3.666667]
         })
-        print(expected)
-        print(result)
         assert_frame_equal(expected, result)
+
+
 
 
 if __name__ == '__main__':
