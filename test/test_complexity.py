@@ -37,7 +37,7 @@ class MyTestCase(unittest.TestCase):
         mock_content_file_frame = _build_mock_content_file_frame()
         result = get_complexity_from_file_content_processing_frame(mock_content_file_frame, "/test/")
         expected = pd.DataFrame({
-            'file_name': ['test.txt'],
+            'file_name': ['/test/test.txt'],
             'lines': [3],
             'indents': [11],
             'complexity': [3.666667]
@@ -49,7 +49,7 @@ class MyTestCase(unittest.TestCase):
         mock_content_file_frame = _build_mock_content_file_frame_with_comments()
         result = get_complexity_from_file_content_processing_frame(mock_content_file_frame, "/test/")
         expected = pd.DataFrame({
-            'file_name': ['test.txt'],
+            'file_name': ['/test/test.txt'],
             'lines': [3],
             'indents': [11],
             'complexity': [3.666667]
@@ -62,14 +62,12 @@ class MyTestCase(unittest.TestCase):
         mock_content_file_frame = _build_mock_content_file_frame_with_comments_and_empty_lines()
         result = get_complexity_from_file_content_processing_frame(mock_content_file_frame, "/test/")
         expected = pd.DataFrame({
-            'file_name': ['test.txt'],
+            'file_name': ['/test/test.txt'],
             'lines': [3],
             'indents': [11],
             'complexity': [3.666667]
         })
         assert_frame_equal(expected, result)
-
-
 
 
 if __name__ == '__main__':

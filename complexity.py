@@ -27,9 +27,9 @@ def get_complexity_from_file_content_processing_frame(data_frame, query_root):
 
 def _create_complexity_frame(file_frame):
     filtered_file_frame = file_frame.drop(file_frame[file_frame['is_comment'] | file_frame['is_empty']].index)
-    filtered_file_frame.reindex()
     complexity_frame = filtered_file_frame.groupby('file_name')['indent'].agg(['count', 'sum'],
                                                                               as_index=True).reset_index()
+
     complexity_frame.columns = ['file_name', 'lines', 'indents']
     complexity_frame.head()
     complexity_frame.reset_index()
@@ -42,7 +42,7 @@ def _clean_file_name(content, repo):
     name = 'file_name'
     content.head()
     content[name] = pd.Categorical(content[name])
-    content[name] = content[name].str.replace("\\", "/").str.replace(repo, "")
+    content[name] = content[name].str.replace("\\", "/").str.replace(repo + '/', "")
 
 
 def _tabs_not_spaces(content):
