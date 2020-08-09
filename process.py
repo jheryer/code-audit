@@ -38,4 +38,7 @@ def data_frame_from_file_list(file_list: List):
     for file in file_list:
         file_df = data_frame_from_file(file)
         content_dataframe.append(file_df)
-    return pd.concat(content_dataframe)
+
+    data_frame = pd.concat(content_dataframe)
+    data_frame.reset_index(inplace=True, drop=True)
+    return data_frame
